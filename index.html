@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Age of Mars is a blockchain game about the exploration of Mars</title>
+    <meta name="description" content="Age of Mars is a profitable game based around PlayToEarn concept. Place your NFTs on the playing field, generate resources and get real profit!">
+    <meta property="og:title" content="Age of Mars is a blockchain game about the exploration of Mars">
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css?v2">
+    <link rel="stylesheet" href="TemplateData/loader.css?v2">
+    <link rel="stylesheet" href="TemplateData/technical.css?v2">
+    <script src="TemplateData/jquery.min.js"></script>
+    <script src="TemplateData/gameloader.js?v10"></script>
+  </head>
+  <body class="dark loading">
+    <div id="unity-container" class="unity-desktop" style="display: none;">
+      <canvas id="unity-canvas"></canvas>
+    </div>
+    <div class="loader" id="loading-cover" style="display: none;">
+      <div class="progress-row">
+        <div class="progress-wrap">
+          <span class="data" id="unity-progress-bar-num">0%</span>
+          <div class="progress" id="unity-progress-bar-full" style="width: 0%;"></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <p class="text orange" id="loader-title"></p>
+        <p class="text small" id="loader-content"></p>
+      </div>
+    </div>
+    <section class="technical" id="technical-layer" style="display: none">
+      <div class="media-tech">
+        <img src="TemplateData/lady.png" alt="media">
+      </div>
+      <div class="info-tech">
+        <div class="title-r">
+          <h2 class="title">Dear players!</h2>
+        </div>
+        <div class="text-r">
+          <p class="text">
+            The server is currently under maintenance. The game will resume shortly.
+          </p>
+          <p class="text">
+            We apologize for the inconvenience caused.
+          </p>
+        </div>
+        <div class="btn-r">
+          <a href="https://dev-lobby.ageofmars.dev/" class="button btn-or">Return to lobby</a>
+        </div>
+      </div>
+      <div class="media-tech"></div>
+    </section>
+    <script>
+    const buildUrl = "Build";
+    const loaderUrl = buildUrl + "/Default.loader.js?v=0.9.22.21";
+    const config = {
+      dataUrl: buildUrl + "/Default.data?v=0.9.22.21",
+      frameworkUrl: buildUrl + "/Default.framework.js?v=0.9.22.21",
+      codeUrl: buildUrl + "/Default.wasm?v=0.9.22.21",
+      productName: "Age of Mars",
+      productVersion: "0.9.22.21",
+      systemUrl: "https://dev-api.ageofmars.dev/v1/system",
+    };
+    
+    const body = document.querySelector('body');
+    const container = document.querySelector("#unity-container");
+    const canvas = document.querySelector("#unity-canvas");
+    const loadingCover = document.querySelector("#loading-cover");
+    const technicalLayer = document.querySelector('#technical-layer');
+    const progressBarFull = document.querySelector("#unity-progress-bar-full");      
+    const progressBarNum = document.querySelector("#unity-progress-bar-num");
+    
+    function startLoading() 
+    {
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
+        {
+          container.className = "unity-mobile";
+          config.devicePixelRatio = window.devicePixelRatio;
+        }
+        loadingCover.style.display = "";
+        const script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => 
+        {
+          createUnityInstance(canvas, config, (progress) => 
+          {
+            progressBarNum.textContent = parseInt(100 * progress) + '%';
+            progressBarFull.style.width = `${100 * progress}%`;
+          }).then((unityInstance) => 
+          {
+            
+          }).catch((message) => 
+          {
+            alert(message);
+          });
+        };
+        document.body.appendChild(script);
+    }
+    
+    setLoaderText();
+
+    function showTechnicalWindow()
+    {
+      loadingCover.remove();
+      $('body').removeClass('dart');
+      $('body').removeClass('loading');
+      $('body').addClass('body');
+      $('body').addClass('stop');
+      $('body .technical').show();
+    }
+    
+    function enshureTechnicalWindow() 
+    {
+      checkPlayer().done(function (r)
+      {
+        technicalLayer.remove();
+        startLoading();
+      }).fail(function ()
+      {
+        showTechnicalWindow();
+      })
+    }
+    
+    checkAPI().then(function (r)
+    {
+      if (r.data.engineeringWorks ?? true)
+      {
+        showTechnicalWindow();
+      } 
+      else 
+      {
+        authorization().then(function ()
+        {
+          if(isAuthorized()) 
+          {
+            enshureTechnicalWindow();
+          }
+          else
+          {
+            technicalLayer.remove();
+            startLoading();
+          }
+        }).catch(function (error) 
+        {
+          location.href = 'https://dev-lobby.ageofmars.dev/';
+        });
+      }
+    })
+    </script>
+  </body>
+</html>
