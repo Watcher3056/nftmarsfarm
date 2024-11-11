@@ -1,0 +1,207 @@
+@font-face {
+    font-family: 'RFDewiRegular';
+    src: local("☺"), url("RFDewiRegular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body.loading {
+    width: 100%;
+    border: 0;
+    font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif;
+    color: #FFF;
+    margin: 0;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #151225 url("loader-bg-v5.png") center bottom no-repeat;
+    background-size: cover;
+}
+
+.loader {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 100px 16px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 5%, rgba(255, 255, 255, 0) 100%);
+}
+
+.loader p {
+    margin: 0;
+}
+
+@media screen and (max-width: 1500px) {
+    .loader {
+        padding: 56px 16px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .loader {
+        padding: 32px 16px;
+    }
+}
+
+.loader .progress-row {
+    display: block;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 8px;
+
+    width: 63%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1300px) {
+    .loader .progress-row {
+        width: 100%;
+        border-radius: 4px;
+        padding: 6px;
+    }
+}
+
+.loader .progress-row .progress-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    height: 46px;
+    border-radius: 8px;
+    background-color: #000000;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1300px) {
+    .loader .progress-row .progress-wrap {
+        height: 30px;
+        border-radius: 4px;
+    }
+}
+
+.loader .progress-row .data {
+    display: inline-block;
+    position: relative;
+    font: 400 27px/1 "RFDewiRegular";
+    color: #ffffff;
+    text-shadow: -2px 0 black, 0 1px black, 2px 0 black, 0 -1px black;
+    z-index: 2;
+}
+
+@media screen and (max-width: 1300px) {
+    .loader .progress-row .data {
+        font-size: 21px;
+    }
+}
+
+.loader .progress-row .progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1300px) {
+    .loader .progress-row .progress {
+        border-radius: 4px;
+    }
+}
+
+.loader .progress-row .progress:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: url("progress-v2.png") center right repeat;
+    -webkit-animation: progress-bar-stripes 30s linear infinite;
+    animation: progress-bar-stripes 30s linear infinite;
+}
+
+@-webkit-keyframes progress-bar-stripes {
+    from {
+        background-position: -1200px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+@keyframes progress-bar-stripes {
+    from {
+        background-position: -1200px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+.loader .info-row {
+    display: block;
+    padding-top: 24px;
+
+    width: 63%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1300px) {
+    .loader .info-row {
+        padding-top: 16px;
+    }
+}
+
+.loader .info-row .text {
+    display: block;
+    font: 400 27px/1.2 "RFDewiRegular";
+    color: #ffffff;
+    text-shadow: -2px 0 black, 0 1px black, 2px 0 black, 0 -1px black;
+    padding-bottom: 2px;
+}
+
+@media screen and (max-width: 1300px) {
+    .loader .info-row .text {
+        font-size: 23px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .loader .info-row .text {
+        font-size: 19px;
+    }
+}
+
+.loader .info-row .small {
+    font-size: 17px;
+}
+
+@media screen and (max-width: 1300px) {
+    .loader .info-row .small {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .loader .info-row .small {
+        font-size: 13px;
+    }
+}
+
+.loader .info-row .orange {
+    color: #ffc075;
+}
