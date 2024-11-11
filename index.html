@@ -47,21 +47,21 @@
           </p>
         </div>
         <div class="btn-r">
-          <a href="{{{ LOBBY_URL }}}" class="button btn-or">Return to lobby</a>
+          <a href="https://dev-lobby.ageofmars.dev/" class="button btn-or">Return to lobby</a>
         </div>
       </div>
       <div class="media-tech"></div>
     </section>
     <script>
     const buildUrl = "Build";
-    const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}?v={{{ PRODUCT_VERSION }}}";
+    const loaderUrl = buildUrl + "/WebGL Builds.loader.js?v=0.9.23.3";
     const config = {
-      dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
-      frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
-      codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
-      productName: "{{{ PRODUCT_NAME }}}",
-      productVersion: "{{{ PRODUCT_VERSION }}}",
-      systemUrl: "{{{ SYSTEM_URL }}}",
+      dataUrl: buildUrl + "/WebGL Builds.data?v=0.9.23.3",
+      frameworkUrl: buildUrl + "/WebGL Builds.framework.js?v=0.9.23.3",
+      codeUrl: buildUrl + "/WebGL Builds.wasm?v=0.9.23.3",
+      productName: "Age of Mars",
+      productVersion: "0.9.23.3",
+      systemUrl: "https://dev-api.ageofmars.dev/v1/system",
     };
     
     const body = document.querySelector('body');
@@ -79,9 +79,6 @@
           container.className = "unity-mobile";
           config.devicePixelRatio = window.devicePixelRatio;
         }
-#if BACKGROUND_FILENAME
-        canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
-#endif
         loadingCover.style.display = "";
         const script = document.createElement("script");
         script.src = loaderUrl;
@@ -147,7 +144,7 @@
           }
         }).catch(function (error) 
         {
-          location.href = '{{{ LOBBY_URL }}}';
+          location.href = 'https://dev-lobby.ageofmars.dev/';
         });
       }
     })

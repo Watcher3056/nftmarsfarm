@@ -24,19 +24,19 @@ function setLoaderText()
 
 function checkAPI()
 {
-    return $.get('{{{ SYSTEM_URL }}}');
+    return $.get('https://dev-api.ageofmars.dev/v1/system');
 }
 
 function checkPlayer() {
     return $.ajax({
-        url: "{{{ CHECK_PLAYER_URL }}}",
+        url: "https://dev-api.ageofmars.dev/v1/auth/test",
         headers: {"Authorization": "Bearer " + window['_api-token']}
     });
 }
 
 function authorization()
 {
-    return $.ajax({url:'{{{ AUTH_URL }}}', type: 'post', xhrFields: {withCredentials: true}})
+    return $.ajax({url:'https://dev-auth.ageofmars.dev/play', type: 'post', xhrFields: {withCredentials: true}})
         .done((res, status, xhr) => 
         {
             let accessToken = res.accessToken;
